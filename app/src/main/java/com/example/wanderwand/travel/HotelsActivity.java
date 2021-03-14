@@ -8,11 +8,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -25,7 +20,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
 import com.airbnb.lottie.LottieAnimationView;
+import com.example.wanderwand.R;
+import com.example.wanderwand.searchcitydialog.CitySearchBottomSheetDialogFragment;
+import com.example.wanderwand.searchcitydialog.CitySearchModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,9 +43,6 @@ import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.example.wanderwand.R;
-import com.example.wanderwand.searchcitydialog.CitySearchBottomSheetDialogFragment;
-import com.example.wanderwand.searchcitydialog.CitySearchModel;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;

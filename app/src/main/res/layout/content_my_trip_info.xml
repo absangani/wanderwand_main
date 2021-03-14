@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -104,7 +104,7 @@
                     android:layout_alignParentTop="true"
                     android:padding="10dp"
                     android:paddingBottom="13dp"
-                    android:src="@drawable/ic_edit_black_24dp" />
+                    app:srcCompat="@drawable/ic_edit_black_24dp" />
             </RelativeLayout>
 
             <TextView
@@ -140,7 +140,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
-                    android:src="@drawable/ic_arrow_drop_down_black_24dp" />
+                    app:srcCompat="@drawable/ic_arrow_drop_down_black_24dp" />
             </RelativeLayout>
 
             <adapters.NestedListView
@@ -237,8 +237,8 @@
                         android:layout_height="25dp"
                         android:layout_gravity="center"
                         android:contentDescription="@string/empty_description"
-                        android:src="@drawable/ic_add_circle_white_24dp"
-                        android:tint="@color/blue" />
+                        app:srcCompat="@drawable/ic_add_circle_white_24dp"
+                        app:tint="@color/blue" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -254,4 +254,4 @@
         </LinearLayout>
 
     </LinearLayout>
-</android.support.v4.widget.NestedScrollView>
+</androidx.core.widget.NestedScrollView>

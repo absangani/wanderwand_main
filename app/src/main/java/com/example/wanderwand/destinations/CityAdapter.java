@@ -1,6 +1,5 @@
 package com.example.wanderwand.destinations;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -8,6 +7,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.wanderwand.R;
+import com.example.wanderwand.destinations.description.FinalCityInfoActivity;
+import com.example.wanderwand.destinations.description.TweetsActivity;
+import com.example.wanderwand.destinations.description.WeatherActivity;
+import com.example.wanderwand.destinations.funfacts.FunFactsActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -18,16 +24,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import flipviewpager.adapter.BaseFlipAdapter;
 import flipviewpager.utils.FlipSettings;
-import com.example.wanderwand.R;
-import com.example.wanderwand.destinations.description.FinalCityInfoActivity;
-import com.example.wanderwand.destinations.description.TweetsActivity;
-import com.example.wanderwand.destinations.description.WeatherActivity;
-import com.example.wanderwand.destinations.funfacts.FunFactsActivity;
 import objects.City;
 
 class CityAdapter extends BaseFlipAdapter<City> {
 
-    private final Activity mContext;
+    private final AppCompatActivity mContext;
     private final int[] mIdsInterest = {R.id.interest_1, R.id.interest_2, R.id.interest_3, R.id.interest_4};
     private final int mPagesPerRow = 3;
     private List<City> mCityList;
@@ -35,7 +36,7 @@ class CityAdapter extends BaseFlipAdapter<City> {
     CityAdapter(Context context, List<City> items, FlipSettings settings) {
         super(context, items, settings);
         this.mCityList = items;
-        this.mContext = (Activity) context;
+        this.mContext = (AppCompatActivity) context;
     }
 
     @Override
@@ -58,7 +59,7 @@ class CityAdapter extends BaseFlipAdapter<City> {
 
         switch (position) {
             case 1:
-                Picasso.with(mContext).
+                Picasso.get().
                         load(city1.getAvatar()).
                         placeholder(R.drawable.placeholder_image).
                         into(holder.leftAvatar);
@@ -66,7 +67,7 @@ class CityAdapter extends BaseFlipAdapter<City> {
 
                 if (city2 != null) {
                     holder.right.setText(city2.getNickname());
-                    Picasso.with(mContext).
+                    Picasso.get().
                             load(city2.getAvatar()).
                             placeholder(R.drawable.placeholder_image).
                             into(holder.rightAvatar);

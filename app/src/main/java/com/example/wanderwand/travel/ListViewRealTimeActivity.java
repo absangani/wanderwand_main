@@ -1,16 +1,19 @@
 package com.example.wanderwand.travel;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
+import com.example.wanderwand.R;
+import com.example.wanderwand.travel.swipefragmentrealtime.ViewPageFragmentsAdapter;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.tabs.TabLayout;
 
 import org.osmdroid.views.MapView;
 
@@ -19,8 +22,6 @@ import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.example.wanderwand.R;
-import com.example.wanderwand.travel.swipefragmentrealtime.ViewPageFragmentsAdapter;
 import utils.GPSTracker;
 import utils.TravelmateSnackbars;
 
@@ -99,11 +100,12 @@ public class ListViewRealTimeActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             // Check for the integer request code originally supplied to startResolutionForResult().
             case REQUEST_LOCATION:
                 switch (resultCode) {
-                    case Activity.RESULT_OK:
+                    case AppCompatActivity.RESULT_OK:
                         //User agreed to make required location settings changes
                         //startLocationUpdates();
                         TravelmateSnackbars.createSnackBar(findViewById(R.id.list_view_realtime),
@@ -112,7 +114,7 @@ public class ListViewRealTimeActivity extends AppCompatActivity {
                         mCurlon = Double.toString(mTracker.getLongitude());
                         break;
 
-                    case Activity.RESULT_CANCELED:
+                    case AppCompatActivity.RESULT_CANCELED:
                         //User chose not to make required location settings changes
                         TravelmateSnackbars.createSnackBar(findViewById(R.id.list_view_realtime),
                                 R.string.location_not_enabled, Snackbar.LENGTH_LONG).show();

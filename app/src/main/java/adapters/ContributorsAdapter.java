@@ -1,13 +1,15 @@
 package adapters;
 
 import android.content.Context;
-import android.support.v7.widget.AppCompatTextView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.AppCompatTextView;
+
+import com.example.wanderwand.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -15,7 +17,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.example.wanderwand.R;
 import objects.Contributor;
 import utils.CircleImageView;
 
@@ -57,7 +58,7 @@ public class ContributorsAdapter extends BaseAdapter {
         ViewHolder viewHolder = new ViewHolder(convertView);
 
         String contributorAvatarUrl = contributor.getAvatarUrl();
-        Picasso.with(mContext).load(contributorAvatarUrl).centerCrop()
+        Picasso.get().load(contributorAvatarUrl).centerCrop()
                 .resize(250, 250)
                 .into(viewHolder.contributor_avatarImageView);
         final String unameFormatted = "@" + contributor.getUsername();

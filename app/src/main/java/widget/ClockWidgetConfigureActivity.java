@@ -1,6 +1,5 @@
 package widget;
 
-import android.app.Activity;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
@@ -12,14 +11,16 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.util.TimeZone;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wanderwand.R;
+
+import java.util.TimeZone;
 
 /**
  * The configuration screen for the {@link ClockWidget ClockWidget} AppWidget.
  */
-public class ClockWidgetConfigureActivity extends Activity implements AdapterView.OnItemSelectedListener {
+public class ClockWidgetConfigureActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private static final String PREFS_NAME = "widget.ClockWidget";
     private static final String PREF_PREFIX_KEY = "appwidget_";

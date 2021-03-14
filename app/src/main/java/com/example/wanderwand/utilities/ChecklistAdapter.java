@@ -1,10 +1,6 @@
 package com.example.wanderwand.utilities;
 
-import android.app.Activity;
 import android.graphics.Paint;
-import android.support.annotation.NonNull;
-import android.support.v7.util.DiffUtil;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -13,6 +9,14 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.wanderwand.R;
+import com.example.wanderwand.roompersistence.ChecklistViewModel;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,8 +29,6 @@ import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import butterknife.OnTouch;
 import database.AppDataBase;
-import com.example.wanderwand.R;
-import com.example.wanderwand.roompersistence.ChecklistViewModel;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -45,7 +47,7 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.View
     // Else, it is for finished / ticked items
     private final boolean mCanAddItems;
 
-    public ChecklistAdapter(Activity context, ChecklistViewModel mViewModel, boolean canAddItems) {
+    public ChecklistAdapter(AppCompatActivity context, ChecklistViewModel mViewModel, boolean canAddItems) {
         mItems = new ArrayList<>(); // initialize with empty list
         this.mCanAddItems = canAddItems;
         this.mViewModel = mViewModel;

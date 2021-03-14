@@ -6,15 +6,16 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
-import android.support.annotation.DrawableRes;
 import android.util.AttributeSet;
 import android.view.View;
+
+import androidx.annotation.DrawableRes;
+
+import com.example.wanderwand.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TimeZone;
-
-import com.example.wanderwand.R;
 
 
 /**

@@ -48,9 +48,8 @@
         android:layout_width="12dp"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/ic_link"
-        android:tint="#bababa"
         android:adjustViewBounds="true"
-        />
+        app:tint="#bababa" />
 
 </LinearLayout>
 

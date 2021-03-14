@@ -1,6 +1,5 @@
 package com.example.wanderwand.mytrips;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,12 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +14,16 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.airbnb.lottie.LottieAnimationView;
+import com.example.wanderwand.R;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,7 +34,6 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import com.example.wanderwand.R;
 import objects.Trip;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -41,8 +42,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 import utils.TravelmateSnackbars;
 
-import static android.app.Activity.RESULT_OK;
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+import static androidx.appcompat.app.AppCompatActivity.RESULT_OK;
 import static utils.Constants.API_LINK_V2;
 import static utils.Constants.USER_TOKEN;
 
@@ -60,7 +61,7 @@ public class MyTripsFragment extends Fragment implements SwipeRefreshLayout.OnRe
     TextView noTrips;
     private String mToken;
     private Handler mHandler;
-    private Activity mActivity;
+    private AppCompatActivity mActivity;
     private TripsListAdapter mMyTripsAdapter;
     static int ADDNEWTRIP_ACTIVITY = 203;
     private View mTripsView;
@@ -207,7 +208,7 @@ public class MyTripsFragment extends Fragment implements SwipeRefreshLayout.OnRe
     @Override
     public void onAttach(Context activity) {
         super.onAttach(activity);
-        this.mActivity = (Activity) activity;
+        this.mActivity = (AppCompatActivity) activity;
     }
 
     @Override

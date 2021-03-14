@@ -1,11 +1,12 @@
 package adapters;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.viewpager.widget.PagerAdapter;
 
 import com.squareup.picasso.Picasso;
 
@@ -58,7 +59,7 @@ public class ImageAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         TouchImageView imageView = new TouchImageView(mContext);
 
-        Picasso.with(mContext).load(mGalImages.get(position)).into(imageView);
+        Picasso.get().load(mGalImages.get(position)).into(imageView);
 
         container.addView(imageView, 0);
         return imageView;

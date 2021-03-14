@@ -1,8 +1,5 @@
 package com.example.wanderwand.utilities;
 
-import android.app.Activity;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +9,17 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.wanderwand.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.example.wanderwand.R;
 import objects.ZoneName;
 import utils.CurrencyConverterGlobal;
 
@@ -25,9 +27,9 @@ public class TimezoneConverterAdapter extends RecyclerView.Adapter<TimezoneConve
         implements Filterable {
 
     private List<ZoneName> mListCurrencyNames, mListCurrencyNamesFiltered;
-    public Activity activity;
+    public AppCompatActivity activity;
 
-    TimezoneConverterAdapter(Activity activity, List<ZoneName> list) {
+    TimezoneConverterAdapter(AppCompatActivity activity, List<ZoneName> list) {
         this.activity = activity;
         this.mListCurrencyNames = list;
         this.mListCurrencyNamesFiltered = list;

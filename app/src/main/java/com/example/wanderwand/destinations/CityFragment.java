@@ -1,6 +1,5 @@
 package com.example.wanderwand.destinations;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,9 +8,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -24,13 +20,20 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.airbnb.lottie.LottieAnimationView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
+import com.example.wanderwand.R;
+import com.example.wanderwand.destinations.description.FinalCityInfoActivity;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
-import com.takusemba.spotlight.OnSpotlightStateChangedListener;
-import com.takusemba.spotlight.OnTargetStateChangedListener;
+import com.takusemba.spotlight.OnSpotlightListener;
+import com.takusemba.spotlight.OnTargetListener;
 import com.takusemba.spotlight.Spotlight;
+import com.takusemba.spotlight.Target;
+import com.takusemba.spotlight.Target.Builder;
 import com.takusemba.spotlight.shape.Circle;
-import com.takusemba.spotlight.target.CustomTarget;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,8 +51,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import database.AppDataBase;
 import flipviewpager.utils.FlipSettings;
-import com.example.wanderwand.R;
-import com.example.wanderwand.destinations.description.FinalCityInfoActivity;
 import objects.City;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -68,8 +69,8 @@ public class CityFragment extends Fragment implements TravelmateSnackbars {
 
     private static final String TAG = "CityFragment";
 
-    @BindView(R.id.animation_view)
-    LottieAnimationView animationView;
+//    @BindView(R.id.animation_view)
+//    LottieAnimationView animationView;
     @BindView(R.id.cities_list)
     ListView lv;
 
@@ -78,7 +79,7 @@ public class CityFragment extends Fragment implements TravelmateSnackbars {
             R.color.orange, R.color.blue, R.color.grey, R.color.yellow, R.color.purple, R.color.peach};
 
     private String mNameyet;
-    private Activity mActivity;
+    private AppCompatActivity mActivity;
     private Handler mHandler;
     private String mToken;
 
@@ -110,7 +111,7 @@ public class CityFragment extends Fragment implements TravelmateSnackbars {
         ButterKnife.bind(this, view);
 
         // Hide keyboard
-        InputMethodManager imm = (InputMethodManager) mActivity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        InputMethodManager imm = (InputMethodManager) mActivity.getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE);
         Objects.requireNonNull(imm).hideSoftInputFromWindow(mActivity.getWindow().getDecorView().getWindowToken(), 0);
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mActivity);
@@ -175,7 +176,7 @@ public class CityFragment extends Fragment implements TravelmateSnackbars {
         if (checkCachedCities(mCities)) {
             fetchCitiesList();
         } else {
-            animationView.setVisibility(View.GONE);
+//            animationView.setVisibility(View.GONE);
 
             for (City city : mCities)
                 city.mInterests = mInterests;
@@ -194,32 +195,31 @@ public class CityFragment extends Fragment implements TravelmateSnackbars {
      * @param spotView - the view to be highlighted
      */
     private void showSpotlightView(View spotView) {
-        CustomTarget customTarget = new CustomTarget.Builder(getActivity())
-                .setPoint(180f, 430f)
+        Target customTarget = new Builder()
+                .setAnchor(180f, 430f)
                 .setShape(new Circle(200f))
                 .setOverlay(spotView)
-                .setOnSpotlightStartedListener(new OnTargetStateChangedListener<CustomTarget>() {
+                .setOnTargetListener(new OnTargetListener() {
                     @Override
-                    public void onStarted(CustomTarget target) {
-                        // do something
+                    public void onStarted() {
+
                     }
 
                     @Override
-                    public void onEnded(CustomTarget target) {
-                        // do something
+                    public void onEnded() {
+
                     }
                 })
                 .build();
 
 
-        Spotlight spotlight =
-                Spotlight.with(mActivity)
-                        .setOverlayColor(R.color.spotlight)
+        Spotlight.Builder spotlight =
+                new Spotlight.Builder(mActivity)
+                        .setBackgroundColorRes(R.color.spotlight)
                         .setDuration(1000L)
                         .setAnimation(new DecelerateInterpolator(2f))
                         .setTargets(customTarget)
-                        .setClosedOnTouchedOutside(false)
-                        .setOnSpotlightStateListener(new OnSpotlightStateChangedListener() {
+                        .setOnSpotlightListener(new OnSpotlightListener() {
                             @Override
                             public void onStarted() {
                                 //do something
@@ -230,10 +230,10 @@ public class CityFragment extends Fragment implements TravelmateSnackbars {
                                 //do something
                             }
                         });
-        spotlight.start();
+        spotlight.build();
+//        spotlight.start();
 
         View.OnClickListener closeSpotlight = v -> {
-            spotlight.closeSpotlight();
             SharedPreferences.Editor editor = mSharedPreferences.edit();
             editor.putInt(SPOTLIGHT_SHOW_COUNT, mSpotlightShownCount + 1);
             editor.apply();
@@ -389,7 +389,7 @@ public class CityFragment extends Fragment implements TravelmateSnackbars {
                             String res = response.body().string();
                             Log.v(TAG, "result=" + res);
 
-                            animationView.setVisibility(View.GONE);
+//                            animationView.setVisibility(View.GONE);
                             JSONArray ar = new JSONArray(res);
 
                             for (int i = 0; i < ar.length(); i++) {
@@ -434,14 +434,14 @@ public class CityFragment extends Fragment implements TravelmateSnackbars {
     @Override
     public void onAttach(Context activity) {
         super.onAttach(activity);
-        this.mActivity = (Activity) activity;
+        this.mActivity = (AppCompatActivity) activity;
     }
 
     /**
      * Plays the network lost animation in the view
      */
     private void networkError() {
-        animationView.setAnimation(R.raw.network_lost);
-        animationView.playAnimation();
+//        animationView.setAnimation(R.raw.network_lost);
+//        animationView.playAnimation();
     }
 }

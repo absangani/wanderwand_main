@@ -4,9 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.squareup.picasso.Picasso;
 
@@ -33,7 +34,7 @@ public class FullScreenImage extends AppCompatActivity {
         Intent intent = getIntent();
         String imageUri = (String) intent.getSerializableExtra(EXTRA_MESSAGE_IMAGE_URI);
         String title = (String) intent.getSerializableExtra(EXTRA_MESSAGE_USER_FULLNAME);
-        Picasso.with(this).load(imageUri).placeholder(R.drawable.default_user_icon)
+        Picasso.get().load(imageUri).placeholder(R.drawable.default_user_icon)
                 .error(R.drawable.default_user_icon)
                 .into(fullProfileImage);
 

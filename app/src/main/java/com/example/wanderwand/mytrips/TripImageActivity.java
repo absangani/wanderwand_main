@@ -3,14 +3,16 @@ package com.example.wanderwand.mytrips;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
+import com.example.wanderwand.R;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
 import adapters.ImageAdapter;
-import com.example.wanderwand.R;
 
 import static utils.Constants.EVENT_IMG;
 import static utils.Constants.EVENT_NAME;

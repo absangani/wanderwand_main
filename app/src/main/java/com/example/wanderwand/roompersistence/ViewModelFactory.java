@@ -1,13 +1,14 @@
 package com.example.wanderwand.roompersistence;
 
-import android.arch.lifecycle.ViewModel;
-import android.arch.lifecycle.ViewModelProvider;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModel;
+
+import static androidx.lifecycle.ViewModelProvider.Factory;
 
 /**
  * Factory for ViewModels
  */
-public class ViewModelFactory implements ViewModelProvider.Factory {
+public class ViewModelFactory implements Factory {
     private final ChecklistDataSource mDataSource;
 
     public ViewModelFactory(ChecklistDataSource dataSource) {

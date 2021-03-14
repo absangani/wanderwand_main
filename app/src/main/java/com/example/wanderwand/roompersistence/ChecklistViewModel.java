@@ -1,6 +1,6 @@
 package com.example.wanderwand.roompersistence;
 
-import android.arch.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 import java.util.concurrent.Callable;

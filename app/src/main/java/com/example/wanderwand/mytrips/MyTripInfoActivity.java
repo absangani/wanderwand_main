@@ -10,11 +10,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
@@ -35,8 +30,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import com.afollestad.materialdialogs.MaterialDialog;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.airbnb.lottie.LottieAnimationView;
+import com.example.wanderwand.FullScreenImage;
+import com.example.wanderwand.R;
+import com.example.wanderwand.destinations.description.FinalCityInfoActivity;
+import com.example.wanderwand.friend.FriendsProfileActivity;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -56,10 +61,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
-import com.example.wanderwand.FullScreenImage;
-import com.example.wanderwand.R;
-import com.example.wanderwand.destinations.description.FinalCityInfoActivity;
-import com.example.wanderwand.friend.FriendsProfileActivity;
 import objects.City;
 import objects.Trip;
 import objects.User;
@@ -130,7 +131,7 @@ public class MyTripInfoActivity extends AppCompatActivity implements TravelmateS
     private Handler mHandler;
     private boolean mIsClicked = false;
     private boolean mIsTripNameEdited = false;
-    private MaterialDialog mDialog;
+    private AlertDialog mDialog;
     private MyTripFriendNameAdapter mAdapter;
     boolean isUserPartofTrip;
     private String mUserEmail;
@@ -150,7 +151,7 @@ public class MyTripInfoActivity extends AppCompatActivity implements TravelmateS
         mToken = sharedPreferences.getString(USER_TOKEN, null);
         mUserEmail = sharedPreferences.getString(USER_EMAIL, null);
         if (mTrip.getImage() != null && !mTrip.getImage().isEmpty())
-            Picasso.with(this).load(mTrip.getImage()).error(R.drawable.placeholder_image)
+            Picasso.get().load(mTrip.getImage()).error(R.drawable.placeholder_image)
                     .placeholder(R.drawable.placeholder_image).into(cityImageView);
         showIcon.setVisibility(GONE);
         editTrip.setVisibility(GONE);
@@ -406,10 +407,9 @@ public class MyTripInfoActivity extends AppCompatActivity implements TravelmateS
         builder.setMessage(R.string.remove_trip_message)
                 .setPositiveButton(R.string.positive_button,
                         (dialog, which) -> {
-                            mDialog = new MaterialDialog.Builder(MyTripInfoActivity.this)
-                                    .title(R.string.app_name)
-                                    .content(R.string.progress_wait)
-                                    .progress(true, 0)
+                            mDialog = new MaterialAlertDialogBuilder(MyTripInfoActivity.this)
+                                    .setTitle(R.string.app_name)
+                                    .setMessage(R.string.progress_wait)
                                     .show();
 
                             String uri;
@@ -525,10 +525,9 @@ public class MyTripInfoActivity extends AppCompatActivity implements TravelmateS
 
     private void addFriend() {
 
-        final MaterialDialog mDialog = new MaterialDialog.Builder(MyTripInfoActivity.this)
-                .title(R.string.app_name)
-                .content(R.string.progress_wait)
-                .progress(true, 0)
+        final AlertDialog mDialog = new MaterialAlertDialogBuilder(MyTripInfoActivity.this)
+                .setTitle(R.string.app_name)
+                .setMessage(R.string.progress_wait)
                 .show();
 
         String uri = API_LINK_V2 + "add-friend-to-trip/" + mTrip.getId() + "/" + mFriendId;

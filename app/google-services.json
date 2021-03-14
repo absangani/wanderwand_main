@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1060681131895",
+    "project_id": "wanderwand-d0026",
+    "storage_bucket": "wanderwand-d0026.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1060681131895:android:84361873f95e53723ea372",
+        "android_client_info": {
+          "package_name": "com.example.wanderwand"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1060681131895-7p32jd9rrs5jm4q2q7fdlb8hq6lks74k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.wanderwand",
+            "certificate_hash": "0b861adf3173c7999998aef73b07d21e3ce82c72"
+          }
+        },
+        {
+          "client_id": "1060681131895-13ut7qcjebao5jh0ieuv80nla1u8efca.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6sFJa673sDS_ML1BleE3KM2D3fInZFAI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1060681131895-13ut7qcjebao5jh0ieuv80nla1u8efca.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,19 +1,9 @@
 package com.example.wanderwand.utilities;
 
-import android.app.Activity;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -25,6 +15,22 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.wanderwand.R;
+import com.example.wanderwand.roompersistence.ChecklistViewModel;
+import com.example.wanderwand.roompersistence.Injection;
+import com.example.wanderwand.roompersistence.ViewModelFactory;
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,10 +38,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import database.AppDataBase;
-import com.example.wanderwand.R;
-import com.example.wanderwand.roompersistence.ChecklistViewModel;
-import com.example.wanderwand.roompersistence.Injection;
-import com.example.wanderwand.roompersistence.ViewModelFactory;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -63,7 +65,7 @@ public class ChecklistFragment extends Fragment implements TravelmateSnackbars,
     @BindView(R.id.recycler_finished)
     RecyclerView mFinishedRecycler;
 
-    private Activity mActivity;
+    private AppCompatActivity mActivity;
     private ChecklistViewModel mViewModel;
     private final CompositeDisposable mDisposable = new CompositeDisposable();
     private View mChecklistView;
@@ -200,7 +202,7 @@ public class ChecklistFragment extends Fragment implements TravelmateSnackbars,
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mActivity = (Activity) context;
+        mActivity = (AppCompatActivity) context;
     }
 
     @OnClick(R.id.layout_divider)

@@ -2,8 +2,9 @@ package com.example.wanderwand.utilities;
 
 import android.content.Context;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
+
+import androidx.annotation.RequiresApi;
 
 import utils.TravelMateAnalogClock;
 

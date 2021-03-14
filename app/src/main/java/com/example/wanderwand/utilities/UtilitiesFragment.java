@@ -1,18 +1,21 @@
 package com.example.wanderwand.utilities;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.wanderwand.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,14 +23,13 @@ import java.util.List;
 import adapters.CardViewOptionsAdapter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.example.wanderwand.R;
 import utils.CardItemEntity;
 
 public class UtilitiesFragment extends Fragment implements CardViewOptionsAdapter.OnItemClickListener {
 
     @BindView(R.id.utility_options_recycle_view)
     RecyclerView mUtilityOptionsRecycleView;
-    private Activity mActivity;
+    private AppCompatActivity mActivity;
     private boolean mHasMagneticSensor = true;
 
     public UtilitiesFragment() {
@@ -67,7 +69,7 @@ public class UtilitiesFragment extends Fragment implements CardViewOptionsAdapte
     @Override
     public void onAttach(Context activity) {
         super.onAttach(activity);
-        this.mActivity = (Activity) activity;
+        this.mActivity = (AppCompatActivity) activity;
     }
 
     @Override

@@ -11,15 +11,24 @@
     android:orientation="horizontal"
     android:layout_marginLeft="10dp">
 
+<!--    <com.github.vipulasri.timelineview.TimelineView-->
+<!--        android:id="@+id/timeline_view"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="match_parent"-->
+<!--        app:markerSize="20dp"-->
+<!--        app:lineSize="2dp"-->
+<!--        app:line="@color/colorPrimary"/>-->
     <com.github.vipulasri.timelineview.TimelineView
         android:id="@+id/timeline_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         app:markerSize="20dp"
-        app:lineSize="2dp"
-        app:line="@color/colorPrimary"/>
+        app:lineWidth="3dp"
+        app:startLineColor="@color/colorAccent"
+        app:endLineColor="@color/colorAccent"
+        app:lineStyle="dash"/>
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
@@ -69,6 +78,6 @@
                 android:paddingEnd="10dp"/>
         </RelativeLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>

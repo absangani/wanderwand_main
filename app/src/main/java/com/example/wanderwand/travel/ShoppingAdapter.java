@@ -11,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.wanderwand.R;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -18,7 +19,6 @@ import org.json.JSONException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.example.wanderwand.R;
 
 class ShoppingAdapter extends BaseAdapter {
 
@@ -75,7 +75,7 @@ class ShoppingAdapter extends BaseAdapter {
                     + mFeedItems.getJSONObject(position).getString("currency");
             holder.description.setText(descriptionText);
 
-            Picasso.with(mContext).load(mFeedItems.getJSONObject(position).getString("image")).into(holder.iv);
+            Picasso.get().load(mFeedItems.getJSONObject(position).getString("image")).into(holder.iv);
         } catch (JSONException e) {
             e.printStackTrace();
         }

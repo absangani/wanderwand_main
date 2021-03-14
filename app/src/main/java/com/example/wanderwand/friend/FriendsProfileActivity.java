@@ -7,10 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,7 +15,14 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.airbnb.lottie.LottieAnimationView;
+import com.example.wanderwand.FullScreenImage;
+import com.example.wanderwand.R;
 import com.google.android.flexbox.FlexboxLayoutManager;
 import com.squareup.picasso.Picasso;
 
@@ -34,8 +37,6 @@ import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.example.wanderwand.FullScreenImage;
-import com.example.wanderwand.R;
 import objects.FriendCity;
 import objects.Trip;
 import okhttp3.Call;
@@ -220,7 +221,7 @@ public class FriendsProfileActivity extends AppCompatActivity implements Travelm
                         String status = object.getString("status");
                         Long dateTime = rfc3339ToMills(dateJoined);
                         String date = getDate(dateTime);
-                        Picasso.with(FriendsProfileActivity.this).load(mFriendImageUri)
+                        Picasso.get().load(mFriendImageUri)
                                 .placeholder(R.drawable.default_user_icon)
                                 .error(R.drawable.default_user_icon).into(friendDisplayImage);
                         if (!status.equals("null")) {

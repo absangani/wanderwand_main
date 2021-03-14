@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/shadow_1"
@@ -61,7 +62,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_favorite_border_red_24dp"
+            app:srcCompat="@drawable/ic_favorite_border_red_24dp"
             android:paddingStart="2dp"/>
 
         <TextView
@@ -76,7 +77,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
-            android:src="@drawable/ic_repeat_blue_24dp" />
+            app:srcCompat="@drawable/ic_repeat_blue_24dp" />
 
         <TextView
             android:id="@+id/retweets_count"

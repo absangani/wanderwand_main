@@ -9,13 +9,13 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.wanderwand.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.example.wanderwand.R;
 import objects.City;
 
 public class FavouriteCitiesAdapter extends BaseAdapter {
@@ -58,7 +58,7 @@ public class FavouriteCitiesAdapter extends BaseAdapter {
         }
 
         holder.fav_name.setText(mCities.get(position).getNickname());
-        Picasso.with(mContext).load(mCities.get(position).mAvatar).into(holder.fav_image);
+        Picasso.get().load(mCities.get(position).mAvatar).into(holder.fav_image);
 
         return convertView;
     }

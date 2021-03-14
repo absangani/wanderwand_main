@@ -1,36 +1,41 @@
 package com.example.wanderwand;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.card.MaterialCardView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
+import com.example.wanderwand.clickImage.SelectImageActivity;
 import com.example.wanderwand.destinations.CityFragment;
 import com.example.wanderwand.friend.MyFriendsFragment;
 import com.example.wanderwand.mytrips.MyTripsFragment;
 import com.example.wanderwand.travel.HotelsActivity;
 import com.example.wanderwand.utilities.UtilitiesFragment;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 public class HomeFragment extends Fragment {
 
-    private Activity mActivity;
+    private AppCompatActivity mActivity;
     @BindView(R.id.materialCardView2)
-    MaterialCardView mHotelBookingView;
+    CardView mHotelBookingView;
     @BindView(R.id.materialCardView21)
-    MaterialCardView mFriendsView;
+    CardView mFriendsView;
     @BindView(R.id.materialCardView3)
-    MaterialCardView mTripsView;
+    CardView mTripsView;
     @BindView(R.id.popular_cities_home)
-    MaterialCardView mCitiesView;
+    CardView mCitiesView;
+    @BindView(R.id.get_city_details)
+    CardView mGetCityDetails;
     @BindView(R.id.utilities_home)
-    MaterialCardView mUtilitiesView;
+    CardView mUtilitiesView;
 
     private FragmentManager mFragmentManager;
 
@@ -64,6 +69,11 @@ public class HomeFragment extends Fragment {
             Fragment citiesFragment = new CityFragment();
             transactFragment(citiesFragment);
         });
+        mGetCityDetails.setOnClickListener(v -> {
+            Intent intent;
+            intent = new Intent(this.mActivity, SelectImageActivity.class);
+                startActivity(intent);
+        });
         mUtilitiesView.setOnClickListener(v -> {
             Fragment utilitiesFragment = new UtilitiesFragment();
             transactFragment(utilitiesFragment);
@@ -85,6 +95,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        this.mActivity = (Activity) context;
+        this.mActivity = (AppCompatActivity) context;
     }
 }

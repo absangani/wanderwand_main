@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,7 +15,7 @@
         android:layout_height="320dp"
         android:layout_centerInParent="true"
         android:contentDescription="@string/compass_dial"
-        android:src="@drawable/compass_dial" />
+        app:srcCompat="@drawable/compass_dial" />
     <ImageView
         android:id="@+id/compass_image_hands"
         android:layout_width="20dp"
@@ -22,5 +23,5 @@
         android:layout_centerInParent="true"
         android:contentDescription="@string/compass_hands"
         android:scaleType="fitXY"
-        android:src="@drawable/compass_hands" />
+        app:srcCompat="@drawable/compass_hands" />
 </RelativeLayout>

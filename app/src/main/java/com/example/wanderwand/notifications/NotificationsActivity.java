@@ -7,10 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.preference.PreferenceManager;
-import android.support.design.widget.Snackbar;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.Menu;
@@ -18,8 +14,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
-import com.afollestad.materialdialogs.MaterialDialog;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.airbnb.lottie.LottieAnimationView;
+import com.example.wanderwand.R;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,7 +37,6 @@ import java.util.TimeZone;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.example.wanderwand.R;
 import objects.Notification;
 import objects.Trip;
 import objects.User;
@@ -64,7 +65,7 @@ public class NotificationsActivity extends AppCompatActivity implements SwipeRef
     private Handler mHandler;
     ArrayList<Notification> notifications;
     private NotificationsAdapter mAdapter;
-    private MaterialDialog mDialog;
+    private AlertDialog mDialog;
     private Menu mOptionsMenu;
     boolean allRead = false;
     private static final int SECOND_MILLIS = 1000;
@@ -287,10 +288,9 @@ public class NotificationsActivity extends AppCompatActivity implements SwipeRef
         builder.setMessage(R.string.mark_all_read_notifications)
                 .setPositiveButton(R.string.positive_button,
                         (dialog, which) -> {
-                            mDialog = new MaterialDialog.Builder(NotificationsActivity.this)
-                                    .title(R.string.app_name)
-                                    .content(R.string.progress_wait)
-                                    .progress(true, 0)
+                            mDialog = new MaterialAlertDialogBuilder(NotificationsActivity.this)
+                                    .setTitle(R.string.app_name)
+                                    .setMessage(R.string.progress_wait)
                                     .show();
 
                             String uri;

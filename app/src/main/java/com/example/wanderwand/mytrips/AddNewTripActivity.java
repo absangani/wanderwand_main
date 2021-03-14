@@ -9,8 +9,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.preference.PreferenceManager;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,9 +17,16 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.afollestad.materialdialogs.MaterialDialog;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.airbnb.lottie.LottieAnimationView;
 import com.dd.processbutton.FlatButton;
+import com.example.wanderwand.R;
+import com.example.wanderwand.searchcitydialog.CitySearchBottomSheetDialogFragment;
+import com.example.wanderwand.searchcitydialog.CitySearchModel;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,9 +41,6 @@ import javax.net.ssl.HttpsURLConnection;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.example.wanderwand.R;
-import com.example.wanderwand.searchcitydialog.CitySearchBottomSheetDialogFragment;
-import com.example.wanderwand.searchcitydialog.CitySearchModel;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MultipartBody;
@@ -76,7 +78,7 @@ public class AddNewTripActivity extends AppCompatActivity implements DatePickerD
     private String mStartdate;
     private String mTripname;
     private String mToken;
-    private MaterialDialog mDialog;
+    private AlertDialog mDialog;
     private Handler mHandler;
     private DatePickerDialog mDatePickerDialog;
     private ArrayList<CitySearchModel> mSearchCities = new ArrayList<>();
@@ -119,10 +121,9 @@ public class AddNewTripActivity extends AppCompatActivity implements DatePickerD
     private void addTrip() {
 
         // Show a mDialog box
-        mDialog = new MaterialDialog.Builder(AddNewTripActivity.this)
-                .title(R.string.app_name)
-                .content(R.string.progress_wait)
-                .progress(true, 0)
+        mDialog = new MaterialAlertDialogBuilder(AddNewTripActivity.this)
+                .setTitle(R.string.app_name)
+                .setMessage(R.string.progress_wait)
                 .show();
 
         String uri = API_LINK_V2 + "add-trip";

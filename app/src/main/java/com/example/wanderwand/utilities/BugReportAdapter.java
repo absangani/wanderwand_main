@@ -1,14 +1,17 @@
 package com.example.wanderwand.utilities;
 
-import android.app.Activity;
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.wanderwand.R;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -18,7 +21,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.example.wanderwand.R;
 import objects.Feedback;
 
 public class BugReportAdapter extends ArrayAdapter<Feedback> {
@@ -31,7 +33,7 @@ public class BugReportAdapter extends ArrayAdapter<Feedback> {
         super(context, R.layout.issues_list_item, feedbacks);
         mContext = context;
         mFeedbacks = feedbacks;
-        mInflater = (LayoutInflater) mContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+        mInflater = (LayoutInflater) mContext.getSystemService(AppCompatActivity.LAYOUT_INFLATER_SERVICE);
     }
 
     @NonNull

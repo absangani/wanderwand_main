@@ -3,18 +3,18 @@ package com.example.wanderwand.destinations.description;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.annotation.NonNull;
-import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
+import androidx.annotation.NonNull;
+import androidx.viewpager.widget.PagerAdapter;
 
 import com.example.wanderwand.FullScreenImage;
 import com.example.wanderwand.R;
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 public class CityImageSliderAdapter extends PagerAdapter {
     private Context mContext;
@@ -41,10 +41,10 @@ public class CityImageSliderAdapter extends PagerAdapter {
         ImageView imageView = new ImageView(mContext);
         //display default city image if no image is present in array
         if (mImagesArray.size() == 0) {
-            Picasso.with(mContext).load(R.drawable.placeholder_image)
+            Picasso.get().load(R.drawable.placeholder_image)
                     .error(R.drawable.placeholder_image).fit().centerCrop().into(imageView);
         }
-        Picasso.with(mContext).load(mImagesArray.get(position))
+        Picasso.get().load(mImagesArray.get(position))
                 .error(R.drawable.placeholder_image).fit().centerCrop().into(imageView);
         container.addView(imageView);
         imageView.setOnClickListener(v -> {

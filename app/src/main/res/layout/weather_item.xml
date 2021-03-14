@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="150dp"
     android:layout_height="wrap_content">
@@ -12,7 +13,7 @@
         android:layout_centerInParent="true"
         android:layout_margin="8dp"
         android:textAllCaps="true"
-        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@android:color/white"
         tools:text="DayOfWeek" />
 
@@ -22,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_margin="8dp"
-        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#88FFFFFF"
         tools:text="Date" />
 
@@ -35,8 +36,8 @@
         android:layout_margin="8dp"
         android:contentDescription="@string/empty_description"
         android:textColor="@android:color/black"
-        android:tint="@android:color/white"
-        tools:src="@drawable/wi_day_rain" />
+        tools:src="@drawable/wi_day_rain"
+        app:tint="@android:color/black" />
 
     <TextView
         android:id="@+id/max_temp"
@@ -44,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/weather_icon"
         android:layout_margin="8dp"
-        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/colorPrimary"
         tools:text="MaxTemp" />
 
@@ -55,7 +56,7 @@
         android:layout_alignParentEnd="true"
         android:layout_below="@id/weather_icon"
         android:layout_margin="8dp"
-        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#81D4FA"
         tools:text="MinTemp" />
 </RelativeLayout>

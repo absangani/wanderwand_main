@@ -1,8 +1,8 @@
 package com.example.wanderwand.travel;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -11,10 +11,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.preference.PreferenceManager;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,8 +20,14 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.afollestad.materialdialogs.MaterialDialog;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+
 import com.airbnb.lottie.LottieAnimationView;
+import com.example.wanderwand.R;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,7 +44,6 @@ import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.example.wanderwand.R;
 import objects.MapItem;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -215,25 +216,36 @@ public class MapViewRealTimeActivity extends AppCompatActivity implements
      * on map
      */
     private void showDialogToSelectitems() {
-        Integer[] selectedItems = new Integer[mSelectedIndices.size()];
+        ArrayList<Integer> selectedItems = new ArrayList(mSelectedIndices.size());
 
         for (int i = 0; i < mSelectedIndices.size(); i++) {
-            selectedItems[i] = mSelectedIndices.get(i);
+            selectedItems.set(i, mSelectedIndices.get(i));
         }
         mSelectedIndices.clear();
-        new MaterialDialog.Builder(this)
-                .title(R.string.title)
-                .items(R.array.items)
-                .itemsCallbackMultiChoice(selectedItems, (dialog, which, text) -> {
-
-                //    mGoogleMap.clear();
-                    mMapItems.clear();
-
-                    for (int i = 0; i < which.length; i++) {
-                        Log.v("selected", which[i] + " " + text[i]);
-                        mSelectedIndices.add(which[i]);
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.title)
+                .setMultiChoiceItems(R.array.items,null,new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which, boolean b) {
+                        if (b) {
+                            // If the user checked the item, add it to the selected items
+                            selectedItems.add(which);
+                        } else if (selectedItems.contains(which)) {
+                            // Else, if the item is already in the array, remove it
+                            selectedItems.remove(Integer.valueOf(which));
+                        }
+                    }
+                })
+                .setPositiveButton(R.string.choose, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        //mGoogleMap.clear();
+                        mMapItems.clear();
+                        for (int i = 0; i < selectedItems.size(); i++) {
+                        Log.v("selected", selectedItems.get(i) + " " + id);
+                        mSelectedIndices.add(selectedItems.get(i));
                         Integer icon;
-                        switch (which[i]) {
+                        switch (selectedItems.get(i)) {
                             case 0:
                                 icon = R.drawable.ic_local_pizza_black;
                                 break;
@@ -262,11 +274,10 @@ public class MapViewRealTimeActivity extends AppCompatActivity implements
                                 icon = R.drawable.ic_attach_money_black;
                                 break;
                         }
-                        MapViewRealTimeActivity.this.getMarkers(HERE_API_MODES.get(which[i]), icon);
+                        MapViewRealTimeActivity.this.getMarkers(HERE_API_MODES.get(selectedItems.get(i)), icon);
                     }
-                    return true;
+                    }
                 })
-                .positiveText(R.string.choose)
                 .show();
     }
 
@@ -357,11 +368,12 @@ public class MapViewRealTimeActivity extends AppCompatActivity implements
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             // Check for the integer request code originally supplied to startResolutionForResult().
             case REQUEST_LOCATION:
                 switch (resultCode) {
-                    case Activity.RESULT_OK:
+                    case AppCompatActivity.RESULT_OK:
                         //User agreed to make required location settings changes
                         //startLocationUpdates();
                         TravelmateSnackbars.createSnackBar(findViewById(R.id.map_real_time),
@@ -371,7 +383,7 @@ public class MapViewRealTimeActivity extends AppCompatActivity implements
                         getMarkers("eat-drink", R.drawable.ic_local_pizza_black);
 
                         break;
-                    case Activity.RESULT_CANCELED:
+                    case AppCompatActivity.RESULT_CANCELED:
                         //User chose not to make required location settings changes
                         TravelmateSnackbars.createSnackBar(findViewById(R.id.map_real_time),
                                 R.string.location_not_enabled, Snackbar.LENGTH_LONG).show();

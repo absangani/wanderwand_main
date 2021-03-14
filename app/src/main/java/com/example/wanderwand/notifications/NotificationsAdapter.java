@@ -8,7 +8,6 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Looper;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,14 +15,18 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.wanderwand.R;
+import com.example.wanderwand.mytrips.MyTripInfoActivity;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.example.wanderwand.R;
-import com.example.wanderwand.mytrips.MyTripInfoActivity;
 import objects.Notification;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -36,7 +39,7 @@ import static utils.Constants.USER_TOKEN;
 
 class NotificationsAdapter extends ArrayAdapter<Notification> {
 
-    private final Activity mContext;
+    private final AppCompatActivity mContext;
     private final List<Notification> mNotifications;
     private String mToken;
     private Handler mHandler;
@@ -44,7 +47,7 @@ class NotificationsAdapter extends ArrayAdapter<Notification> {
     NotificationsAdapter(Context context, List<Notification> items) {
         super(context, R.layout.notification_listitem, items);
         mNotifications = items;
-        this.mContext = (Activity) context;
+        this.mContext = (AppCompatActivity) context;
     }
 
     @NonNull

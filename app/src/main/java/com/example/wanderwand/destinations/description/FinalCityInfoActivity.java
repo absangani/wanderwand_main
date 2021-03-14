@@ -7,16 +7,19 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.preference.PreferenceManager;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
+
 import com.airbnb.lottie.LottieAnimationView;
+import com.example.wanderwand.R;
+import com.example.wanderwand.destinations.funfacts.FunFactsActivity;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -29,8 +32,6 @@ import java.util.TimerTask;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import database.AppDataBase;
-import com.example.wanderwand.R;
-import com.example.wanderwand.destinations.funfacts.FunFactsActivity;
 import objects.City;
 
 import static utils.Constants.EXTRA_MESSAGE_CITY_OBJECT;
@@ -276,7 +277,7 @@ public class FinalCityInfoActivity extends AppCompatActivity
                 e.printStackTrace();
             }
             if (id == 0) {
-                Picasso.with(FinalCityInfoActivity.this).load(iconUrl).into(icon);
+                Picasso.get().load(iconUrl).into(icon);
             } else {
                 icon.setImageResource(id);
             }

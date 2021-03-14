@@ -1,6 +1,6 @@
 package com.example.wanderwand.roompersistence;
 
-import android.arch.persistence.room.TypeConverter;
+import androidx.room.TypeConverter;
 
 // A TypeConverter class that will automatically convert the boolean type
 // to String(s) in order to store in SQLite Db, and vice-versa.

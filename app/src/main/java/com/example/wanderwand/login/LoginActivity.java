@@ -10,10 +10,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.preference.PreferenceManager;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TextInputLayout;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Patterns;
 import android.view.View;
 import android.view.Window;
@@ -22,8 +18,15 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.afollestad.materialdialogs.MaterialDialog;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 import com.dd.processbutton.FlatButton;
+import com.example.wanderwand.MainActivity;
+import com.example.wanderwand.R;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputLayout;
 import com.mukesh.OnOtpCompletionListener;
 import com.mukesh.OtpView;
 
@@ -31,8 +34,6 @@ import java.util.regex.Matcher;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.example.wanderwand.MainActivity;
-import com.example.wanderwand.R;
 import utils.TravelmateSnackbars;
 import utils.Utils;
 
@@ -112,7 +113,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     TextInputLayout mInputLayoutLastNameSignup;
 
     private SharedPreferences mSharedPreferences;
-    private MaterialDialog mDialog;
+    private AlertDialog mDialog;
     private Handler mHandler;
     private String mOtpCode;
 
@@ -286,10 +287,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void showLoadingDialog() {
-        mDialog = new MaterialDialog.Builder(this)
-                .title(R.string.app_name)
-                .content(R.string.progress_wait)
-                .progress(true, 0)
+        mDialog = new AlertDialog.Builder(this)
+                .setTitle(R.string.app_name)
+                .setMessage(R.string.progress_wait)
                 .show();
     }
 

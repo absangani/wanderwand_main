@@ -2,9 +2,6 @@ package com.example.wanderwand.mytrips;
 
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.graphics.drawable.VectorDrawableCompat;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +9,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
+
+import com.example.wanderwand.R;
 import com.github.vipulasri.timelineview.TimelineView;
 import com.squareup.picasso.Picasso;
 
@@ -24,7 +26,6 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.example.wanderwand.R;
 import objects.Trip;
 
 class TripsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -95,7 +96,7 @@ class TripsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         R.drawable.ic_marker, mContext.getTheme()));
             }
 
-            Picasso.with(mContext).load(trip.getImage()).placeholder(R.drawable.placeholder_image)
+            Picasso.get().load(trip.getImage()).placeholder(R.drawable.placeholder_image)
                     .into(tripHolder.city);
             tripHolder.cityname.setText(trip.getName());
             tripHolder.date.setText(trip.getStart());

@@ -1,8 +1,6 @@
 package adapters;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,13 +9,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.wanderwand.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.example.wanderwand.R;
 import utils.RestaurantItemEntity;
 
 public class RestaurantsCardViewAdapter
@@ -52,7 +53,7 @@ public class RestaurantsCardViewAdapter
         RestaurantItemEntity currentItem = mOptionsEntityList.get(position);
 
         if (!TextUtils.isEmpty(currentItem.getImage())) {
-            Picasso.with(context).load(currentItem
+            Picasso.get().load(currentItem
                     .getImage()).fit().centerCrop().into(holder.optionImage);
         }
         holder.optionName.setText(currentItem.getName());

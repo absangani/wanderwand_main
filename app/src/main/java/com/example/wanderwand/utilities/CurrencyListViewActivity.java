@@ -1,13 +1,16 @@
 package com.example.wanderwand.utilities;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.wanderwand.R;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,10 +19,9 @@ import java.util.Collections;
 import java.util.StringTokenizer;
 
 import butterknife.BindView;
-import com.example.wanderwand.R;
 import objects.ZoneName;
 
-public class CurrencyListViewActivity extends Activity implements TextWatcher {
+public class CurrencyListViewActivity extends AppCompatActivity implements TextWatcher {
 
     @BindView(R.id.listView)
     RecyclerView mListview;

@@ -1,6 +1,5 @@
 package com.example.wanderwand;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,12 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -24,8 +17,17 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
 import com.airbnb.lottie.LottieAnimationView;
 import com.dd.processbutton.iml.ActionProcessButton;
+import com.example.wanderwand.login.LoginActivity;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -34,7 +36,6 @@ import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.example.wanderwand.login.LoginActivity;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MultipartBody;
@@ -79,7 +80,7 @@ public class SettingsFragment extends Fragment {
 
     private String mToken;
     private Handler mHandler;
-    private Activity mActivity;
+    private AppCompatActivity mActivity;
     private SharedPreferences mSharedPreferences;
     private View mView;
     private static final String LOG_TAG = ProfileActivity.class.getSimpleName();
@@ -95,7 +96,7 @@ public class SettingsFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mActivity = (Activity) context;
+        mActivity = (AppCompatActivity) context;
     }
 
     @Nullable
@@ -330,7 +331,7 @@ public class SettingsFragment extends Fragment {
     }
 
     private void hideKeyboard() {
-        InputMethodManager imm = (InputMethodManager) mActivity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        InputMethodManager imm = (InputMethodManager) mActivity.getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE);
         assert imm != null;
         imm.hideSoftInputFromWindow(mView.getWindowToken(), 0);
     }

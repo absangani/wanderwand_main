@@ -5,17 +5,19 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.FileProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.core.content.FileProvider;
+import androidx.fragment.app.Fragment;
+
+import com.example.wanderwand.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -24,7 +26,6 @@ import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.example.wanderwand.R;
 import objects.FunFact;
 
 import static utils.Constants.EXTRA_MESSAGE_FUNFACT_OBJECT;
@@ -84,7 +85,7 @@ public class FunfactFragment extends Fragment {
                 (holder.source).setOnClickListener(view1 -> openURL(fact.getSourceURL()));
                 (holder.share).setOnClickListener(view1 -> shareClicked());
             }
-            Picasso.with(getContext()).load(fact.getImage()).error(R.drawable.placeholder_image)
+            Picasso.get().load(fact.getImage()).error(R.drawable.placeholder_image)
                     .placeholder(R.drawable.placeholder_image)
                     .into(holder.image);
         }

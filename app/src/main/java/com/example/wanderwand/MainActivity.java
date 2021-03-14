@@ -1,7 +1,6 @@
 package com.example.wanderwand;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,17 +11,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.ContextThemeWrapper;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,19 +18,18 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
-import com.github.juanlabrador.badgecounter.BadgeCounter;
-import com.squareup.picasso.Picasso;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.util.Objects;
-
-import butterknife.ButterKnife;
-import com.example.wanderwand.destinations.CityFragment;
 import com.example.wanderwand.favourite.FavouriteCitiesFragment;
 import com.example.wanderwand.friend.FriendsProfileActivity;
 import com.example.wanderwand.friend.MyFriendsFragment;
@@ -53,8 +40,17 @@ import com.example.wanderwand.notifications.NotificationsActivity;
 import com.example.wanderwand.travel.TravelFragment;
 import com.example.wanderwand.utilities.AboutUsFragment;
 import com.example.wanderwand.utilities.UtilitiesFragment;
-import io.github.tonnyl.whatsnew.WhatsNew;
-import io.github.tonnyl.whatsnew.item.WhatsNewItem;
+import com.github.juanlabrador.badgecounter.BadgeCounter;
+import com.google.android.material.navigation.NavigationView;
+import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.Objects;
+
+import butterknife.ButterKnife;
 import objects.Trip;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -77,8 +73,6 @@ import static utils.Constants.USER_STATUS;
 import static utils.Constants.USER_TOKEN;
 import static utils.DateUtils.getDate;
 import static utils.DateUtils.rfc3339ToMills;
-import static utils.WhatsNewStrings.WHATS_NEW1_TEXT;
-import static utils.WhatsNewStrings.WHATS_NEW1_TITLE;
 
 /**
  * Launcher Activity; Handles fragment changes;
@@ -114,12 +108,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (Utils.isNetworkConnected(this)) {
             DailyQuotesManager.checkDailyQuote(this);
         }
-        // To show what's new in our application
-        WhatsNew whatsNew = WhatsNew.newInstance(
-                new WhatsNewItem(WHATS_NEW1_TITLE, WHATS_NEW1_TEXT));
-        whatsNew.setButtonBackground(ContextCompat.getColor(this, R.color.colorPrimaryDark));
-        whatsNew.setButtonTextColor(ContextCompat.getColor(this, R.color.white));
-        whatsNew.presentAutomatically(this);
+//        // To show what's new in our application
+//        WhatsNew whatsNew = WhatsNew.newInstance(
+//                new WhatsNewItem(WHATS_NEW1_TITLE, WHATS_NEW1_TEXT));
+//        whatsNew.setButtonBackground(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+//        whatsNew.setButtonTextColor(ContextCompat.getColor(this, R.color.white));
+//        whatsNew.presentAutomatically(this);
 
         // To check for shared profile intents
         String action = getIntent().getAction();
@@ -136,9 +130,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragment = getFragmentByNavMenuItemId(mPreviousMenuItemId);
             defaultSelectedNavMenu(mPreviousMenuItemId);
         } else {
-            fragment = CityFragment.newInstance();
-            defaultSelectedNavMenu(R.id.nav_city);
-            mPreviousMenuItemId = R.id.nav_city;
+            fragment = HomeFragment.newInstance();
+            defaultSelectedNavMenu(R.id.nav_home);
+            mPreviousMenuItemId = R.id.nav_home;
         }
 
         fragmentManager.beginTransaction().replace(R.id.inc, fragment).commit();
@@ -147,11 +141,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getRuntimePermissions();
 
         mDrawer = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
-                mDrawer,
-                toolbar,
-                R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -238,9 +228,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 fragment = MyTripsFragment.newInstance();
                 break;
 
-            case R.id.nav_city:
-                fragment = CityFragment.newInstance();
-                break;
+//            case R.id.nav_city:
+//                fragment = CityFragment.newInstance();
+//                break;
 
             case R.id.nav_utility:
                 fragment = UtilitiesFragment.newInstance();
@@ -328,7 +318,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         emailTextView.setText(emailId);
 
         ImageView imageView = navigationHeader.findViewById(R.id.image);
-        Picasso.with(MainActivity.this).load(imageURL).placeholder(R.drawable.icon_profile)
+        Picasso.get().load(imageURL).placeholder(R.drawable.icon_profile)
                 .error(R.drawable.icon_profile).into(imageView);
         imageView.setOnClickListener(v -> startActivity(ProfileActivity.getStartIntent(MainActivity.this)));
     }

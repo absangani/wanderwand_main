@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     android:id="@+id/activityAddNewTrip"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -30,9 +30,10 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/white">
         <EditText
             android:id="@+id/tname"
             android:layout_width="match_parent"
@@ -43,11 +44,11 @@
             android:hint="@string/prompt_trip_name"
             android:maxLines="1"
             android:popupBackground="@color/white"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textColorHint="@color/black"
             android:inputType="text"
             tools:targetApi="lollipop" />
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -57,7 +58,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_event"
+            app:srcCompat="@drawable/ic_event"
             android:layout_weight="0"/>
         <TextView
             android:id="@+id/sdate"
@@ -81,7 +82,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_location"
+            app:srcCompat="@drawable/ic_location"
             android:layout_weight="0"/>
         <TextView
             android:layout_weight="1"
@@ -106,4 +107,4 @@
         android:text="@string/prompt_add_trip"
         android:textColor="@color/white" />
 </LinearLayout>
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

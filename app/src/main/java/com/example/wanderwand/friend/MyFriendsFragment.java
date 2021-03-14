@@ -1,22 +1,24 @@
 package com.example.wanderwand.friend;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.airbnb.lottie.LottieAnimationView;
+import com.example.wanderwand.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,7 +30,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.example.wanderwand.R;
 import objects.User;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -51,7 +52,7 @@ public class MyFriendsFragment extends Fragment {
 
     private String mToken;
     private Handler mHandler;
-    private Activity mActivity;
+    private AppCompatActivity mActivity;
     private MyFriendsAdapter mAdapter;
 
     public MyFriendsFragment() {
@@ -163,7 +164,7 @@ public class MyFriendsFragment extends Fragment {
     @Override
     public void onAttach(Context activity) {
         super.onAttach(activity);
-        this.mActivity = (Activity) activity;
+        this.mActivity = (AppCompatActivity) activity;
     }
 
 }

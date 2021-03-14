@@ -5,9 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,14 +15,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.afollestad.materialdialogs.MaterialDialog;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+
+import com.example.wanderwand.R;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import com.example.wanderwand.R;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -46,7 +48,7 @@ public class AddBugFragment extends Fragment implements AdapterView.OnItemSelect
     EditText mDescriptionEditText;
     @BindView(R.id.button_report)
     Button mReportButton;
-    private MaterialDialog mDialog;
+    private AlertDialog mDialog;
 
     private String mType = null;
     private String mAuthToken = null;
@@ -168,10 +170,9 @@ public class AddBugFragment extends Fragment implements AdapterView.OnItemSelect
     }
 
     private void showProgressDialog() {
-        mDialog = new MaterialDialog.Builder(getActivity())
-                .title(R.string.app_name)
-                .content(R.string.progress_wait)
-                .progress(true, 0)
+        mDialog = new MaterialAlertDialogBuilder(getActivity())
+                .setTitle(R.string.app_name)
+                .setMessage(R.string.progress_wait)
                 .show();
     }
 

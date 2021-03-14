@@ -1,15 +1,18 @@
 package com.example.wanderwand.utilities;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.wanderwand.R;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,10 +21,9 @@ import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
-import com.example.wanderwand.R;
 import objects.ZoneName;
 
-public class TimezoneListViewActivity extends Activity implements TextWatcher {
+public class TimezoneListViewActivity extends AppCompatActivity implements TextWatcher {
 
     @BindView(R.id.listView)
     RecyclerView mListview;

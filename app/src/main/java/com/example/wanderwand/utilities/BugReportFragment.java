@@ -1,24 +1,26 @@
 package com.example.wanderwand.utilities;
 
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import com.airbnb.lottie.LottieAnimationView;
+import com.example.wanderwand.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,7 +32,6 @@ import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.example.wanderwand.R;
 import objects.Feedback;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -58,7 +59,7 @@ public class BugReportFragment extends Fragment {
     private String mAuthToken = null;
     private final List<Feedback> mFeedbacks = new ArrayList<>();
     private BugReportAdapter mAdapter;
-    private Activity mActivity;
+    private AppCompatActivity mActivity;
 
     public BugReportFragment() {
         // Required empty public constructor
@@ -174,7 +175,7 @@ public class BugReportFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mActivity = (Activity) context;
+        mActivity = (AppCompatActivity) context;
     }
 
     @Override

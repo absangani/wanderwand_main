@@ -3,13 +3,17 @@ package com.example.wanderwand.utilities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.TextClock;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.wanderwand.R;
+import com.example.wanderwand.utilities.helper.KeyboardHelper;
 
 import java.util.Arrays;
 import java.util.Calendar;
@@ -19,8 +23,6 @@ import java.util.TimeZone;
 import adapters.TimezoneAdapter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.example.wanderwand.R;
-import com.example.wanderwand.utilities.helper.KeyboardHelper;
 
 public class WorldClockActivity extends AppCompatActivity {
 

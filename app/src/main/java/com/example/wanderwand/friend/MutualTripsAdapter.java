@@ -2,8 +2,6 @@ package com.example.wanderwand.friend;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +10,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.wanderwand.R;
+import com.example.wanderwand.mytrips.MyTripInfoActivity;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -21,8 +24,6 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.example.wanderwand.R;
-import com.example.wanderwand.mytrips.MyTripInfoActivity;
 import objects.Trip;
 
 public class MutualTripsAdapter extends RecyclerView.Adapter<MutualTripsAdapter.ViewHolder> {
@@ -62,7 +63,7 @@ public class MutualTripsAdapter extends RecyclerView.Adapter<MutualTripsAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Picasso.with(mContext).load(mTrips.get(position).getImage()).placeholder(R.drawable.placeholder_image)
+        Picasso.get().load(mTrips.get(position).getImage()).placeholder(R.drawable.placeholder_image)
                 .into(holder.cityImage);
         holder.cityName.setText(mTrips.get(position).getName());
         holder.date.setText(mTrips.get(position).getStart());

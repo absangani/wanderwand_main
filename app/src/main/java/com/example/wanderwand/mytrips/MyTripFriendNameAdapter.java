@@ -6,8 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Looper;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -18,6 +16,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.wanderwand.R;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -26,7 +29,6 @@ import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.example.wanderwand.R;
 import objects.Trip;
 import objects.User;
 import okhttp3.Call;
@@ -40,13 +42,13 @@ import static utils.Constants.EXTRA_MESSAGE_TRIP_OBJECT;
 import static utils.Constants.USER_TOKEN;
 
 class MyTripFriendNameAdapter extends ArrayAdapter<User> {
-    private final Activity mContext;
+    private final AppCompatActivity mContext;
     private final List<User> mUsers;
     private Trip mTrip;
     private String mFriendId;
     private Handler mHandler;
 
-    MyTripFriendNameAdapter(Activity context, List<User> users, Trip trip, String id) {
+    MyTripFriendNameAdapter(AppCompatActivity context, List<User> users, Trip trip, String id) {
         super(context, R.layout.home_city_listitem, users);
         this.mContext = context;
         this.mUsers = users;
@@ -66,7 +68,7 @@ class MyTripFriendNameAdapter extends ArrayAdapter<User> {
         } else
             holder = (ViewHolder) view.getTag();
         holder.name.setText(mUsers.get(position).getFirstName());
-        Picasso.with(mContext).load(mUsers.get(position).getImage()).placeholder(R.drawable.icon_profile)
+        Picasso.get().load(mUsers.get(position).getImage()).placeholder(R.drawable.icon_profile)
                 .error(R.drawable.icon_profile).into(holder.imageView);
         holder.removeFriend.setOnClickListener(v -> showFriendRemoveDialog(mUsers.get(position).getFirstName()));
         return view;

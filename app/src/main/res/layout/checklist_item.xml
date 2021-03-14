@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/stock_activity_background"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -13,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:paddingTop="4dp"
-        android:src="@drawable/ic_drag_indicator_grey_400_24dp" />
+        app:srcCompat="@drawable/ic_drag_indicator_grey_400_24dp" />
 
     <CheckBox
         android:id="@+id/row_cb"
@@ -27,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:paddingTop="4dp"
-        android:src="@drawable/ic_add_grey_400_24dp"
+        app:srcCompat="@drawable/ic_add_grey_400_24dp"
         android:visibility="gone" />
 
     <EditText
@@ -49,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:paddingTop="4dp"
-        android:src="@drawable/ic_cancel_grey_400_24dp"
+        app:srcCompat="@drawable/ic_cancel_grey_400_24dp"
         android:visibility="gone" />
 
 </LinearLayout>

@@ -1,11 +1,11 @@
 package com.example.wanderwand.destinations.description
 
-import android.app.Activity
+import androidx.appcompat.app.AppCompatActivity
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
+import com.google.android.material.appbar.MaterialToolbar
 import android.util.Log
+import androidx.appcompat.widget.Toolbar
 import com.squareup.picasso.Picasso
 import com.example.wanderwand.R
 import com.example.wanderwand.utilities.gone
@@ -18,7 +18,7 @@ class RestaurantDetailsActivity : AppCompatActivity() {
         private const val EXTRA_DETAILS = "extra_details"
         val TAG = "RestaurantDetails"
         @JvmStatic
-        fun newInstance(context: Activity, restaurantDetails: RestaurantDetails) {
+        fun newInstance(context: AppCompatActivity, restaurantDetails: RestaurantDetails) {
             val intent = Intent(context, RestaurantDetailsActivity::class.java)
             intent.putExtra(EXTRA_DETAILS, restaurantDetails)
             context.startActivity(intent)
@@ -46,7 +46,7 @@ class RestaurantDetailsActivity : AppCompatActivity() {
 
     private fun populateViews (restaurant: RestaurantDetails) {
         if (restaurant.featuredImage.trim().isNotEmpty()) {
-            Picasso.with(this).load(restaurant.featuredImage).into(image_view)
+            Picasso.get().load(restaurant.featuredImage).into(image_view)
         }
 
         address.text = getString(R.string.rest_address, restaurant.address)

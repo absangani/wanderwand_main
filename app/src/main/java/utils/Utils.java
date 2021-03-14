@@ -1,12 +1,13 @@
 package utils;
 
-import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Base64;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -45,7 +46,7 @@ public class Utils {
     }
 
     //hide soft keyboard
-    public static void hideKeyboard(Activity th) {
+    public static void hideKeyboard(AppCompatActivity th) {
         View view = th.getCurrentFocus();
         if (view != null) {
             InputMethodManager inputManager = (InputMethodManager) th.getSystemService(Context.INPUT_METHOD_SERVICE);

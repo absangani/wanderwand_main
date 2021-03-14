@@ -1,6 +1,5 @@
 package com.example.wanderwand;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,11 +10,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.preference.PreferenceManager;
-import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -33,12 +27,20 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.MaterialDialog;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.airbnb.lottie.LottieAnimationView;
 import com.cloudinary.android.MediaManager;
 import com.cloudinary.android.callback.ErrorInfo;
 import com.cloudinary.android.callback.UploadCallback;
+import com.example.wanderwand.login.LoginActivity;
+import com.example.wanderwand.utilities.ShareContactActivity;
 import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 
@@ -55,8 +57,6 @@ import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.example.wanderwand.login.LoginActivity;
-import com.example.wanderwand.utilities.ShareContactActivity;
 import objects.City;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -141,7 +141,7 @@ public class ProfileActivity extends AppCompatActivity implements TravelmateSnac
     private static final String LOG_TAG = ProfileActivity.class.getSimpleName();
     private String mProfileImageUrl;
     private CitiesTravelledAdapter mCitiesAdapter;
-    private MaterialDialog mDialog;
+    private AlertDialog mDialog;
     private boolean mIsVerified;
 
     @Override
@@ -324,6 +324,7 @@ public class ProfileActivity extends AppCompatActivity implements TravelmateSnac
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == VERIFICATION_REQUEST_CODE) {
             recreate();
         }
@@ -334,7 +335,7 @@ public class ProfileActivity extends AppCompatActivity implements TravelmateSnac
         //After user has picked the image
         if (requestCode == RESULT_PICK_IMAGE && data.hasExtra("remove_image")) {
             deleteProfilePicture();
-        } else if (requestCode == RESULT_PICK_IMAGE && resultCode == Activity.RESULT_OK) {
+        } else if (requestCode == RESULT_PICK_IMAGE && resultCode == AppCompatActivity.RESULT_OK) {
             Uri selectedImage = data.getData();
             //startCropIntent(selectedImage);
             CropImage.activity(selectedImage).start(this);
@@ -418,10 +419,10 @@ public class ProfileActivity extends AppCompatActivity implements TravelmateSnac
         builder.setMessage(R.string.remove_profile_picture)
                 .setPositiveButton(R.string.positive_button,
                         (dialog, which) -> {
-                            mDialog = new MaterialDialog.Builder(ProfileActivity.this)
-                                    .title(R.string.app_name)
-                                    .content(R.string.progress_wait)
-                                    .progress(true, 0)
+                            mDialog = new MaterialAlertDialogBuilder(ProfileActivity.this)
+                                    .setTitle(R.string.app_name)
+                                    .setMessage(R.string.progress_wait)
+                                    .setCancelable(true)
                                     .show();
 
                             String uri;
@@ -449,7 +450,7 @@ public class ProfileActivity extends AppCompatActivity implements TravelmateSnac
                                         if (response.isSuccessful()) {
                                             TravelmateSnackbars.createSnackBar(findViewById(R.id.layout), res,
                                                     Snackbar.LENGTH_SHORT).show();
-                                            Picasso.with(ProfileActivity.this).load(R.drawable.default_user_icon)
+                                            Picasso.get().load(R.drawable.default_user_icon)
                                                     .into(displayImage);
                                         } else {
                                             TravelmateSnackbars.createSnackBar(findViewById(R.id.layout), res,
@@ -705,7 +706,7 @@ public class ProfileActivity extends AppCompatActivity implements TravelmateSnac
         displayName.setText(fullName);
         emailId.setText(email);
         joiningDate.setText(String.format(getString(R.string.text_joining_date), dateJoined));
-        Picasso.with(ProfileActivity.this).load(imageURL).placeholder(R.drawable.default_user_icon)
+        Picasso.get().load(imageURL).placeholder(R.drawable.default_user_icon)
                 .error(R.drawable.default_user_icon).into(displayImage);
         setTitle(fullName);
 
@@ -735,7 +736,7 @@ public class ProfileActivity extends AppCompatActivity implements TravelmateSnac
         emailId.setText(email);
         joiningDate.setText(String.format(getString(R.string.text_joining_date), dateJoined));
 
-        Picasso.with(ProfileActivity.this)
+        Picasso.get()
                 .load(R.drawable.default_user_icon)
                 .placeholder(R.drawable.default_user_icon)
                 .into(displayImage);
@@ -765,7 +766,7 @@ public class ProfileActivity extends AppCompatActivity implements TravelmateSnac
 
             @Override
             public void onSuccess(String requestId, Map resultData) {
-                Picasso.with(ProfileActivity.this)
+                Picasso.get()
                         .load(croppedImage)
                         .error(R.drawable.default_user_icon)
                         .into(displayImage);

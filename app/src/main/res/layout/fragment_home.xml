@@ -5,11 +5,11 @@
     android:id="@+id/parent_home"
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.design.card.MaterialCardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/materialCardView21"
         android:layout_width="150dp"
         android:layout_height="149dp"
@@ -29,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight=".7"
-                android:src="@drawable/friends" />
+                app:srcCompat="@drawable/friends" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -40,9 +40,9 @@
                 android:textSize="25sp" />
         </LinearLayout>
 
-    </android.support.design.card.MaterialCardView>
+    </androidx.cardview.widget.CardView>
 
-    <android.support.design.card.MaterialCardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/materialCardView2"
         android:clickable="true"
         android:layout_width="150dp"
@@ -65,7 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight=".7"
-                android:src="@drawable/hotel" />
+                app:srcCompat="@drawable/hotel" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -77,9 +77,9 @@
                 android:textSize="25sp" />
         </LinearLayout>
 
-    </android.support.design.card.MaterialCardView>
+    </androidx.cardview.widget.CardView>
 
-    <android.support.design.card.MaterialCardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/popular_cities_home"
         android:layout_width="150dp"
         android:layout_height="149dp"
@@ -99,7 +99,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight=".7"
-                android:src="@drawable/popular_cities" />
+                app:srcCompat="@drawable/popular_cities" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -110,9 +110,11 @@
                 android:textSize="20sp" />
         </LinearLayout>
 
-    </android.support.design.card.MaterialCardView>
+    </androidx.cardview.widget.CardView>
 
-    <android.support.design.card.MaterialCardView
+
+
+    <androidx.cardview.widget.CardView
         android:id="@+id/materialCardView3"
         android:layout_width="150dp"
         android:layout_height="149dp"
@@ -132,7 +134,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight=".7"
-                android:src="@drawable/upcoming_long_weekends" />
+                app:srcCompat="@drawable/upcoming_long_weekends" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -143,9 +145,42 @@
                 android:textSize="25sp" />
         </LinearLayout>
 
-    </android.support.design.card.MaterialCardView>
+    </androidx.cardview.widget.CardView>
 
-    <android.support.design.card.MaterialCardView
+    <androidx.cardview.widget.CardView
+        android:id="@+id/get_city_details"
+        android:layout_width="150dp"
+        android:layout_height="149dp"
+        android:elevation="10dp"
+        app:cardCornerRadius="10.0dp"
+        app:layout_constraintBottom_toTopOf="@+id/utilities_home"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/popular_cities_home">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight=".7"
+                app:srcCompat="@drawable/popular_cities" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight=".3"
+                android:gravity="center_horizontal"
+                android:text="City Details"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
         android:id="@+id/utilities_home"
         android:layout_width="150dp"
         android:layout_height="149dp"
@@ -167,7 +202,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight=".7"
-                android:src="@drawable/utilities" />
+                app:srcCompat="@drawable/utilities" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -178,6 +213,6 @@
                 android:textSize="25sp" />
         </LinearLayout>
 
-    </android.support.design.card.MaterialCardView>
-</android.support.constraint.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

@@ -6,18 +6,19 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
+import com.example.wanderwand.R;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import com.example.wanderwand.R;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,7 +27,7 @@ import com.example.wanderwand.R;
  */
 public class AboutUsFragment extends Fragment {
 
-    private static final String EMAIL = "projecttravelmate.github.io@gmail.com";
+    private static final String EMAIL = "poojamanvani123@gmail.com";
     private static final String WEBSITE = "http://project-travel-mate.github.io/Travel-Mate/";
     private static final String PRIVACY_POLICY = "https://sites.google.com/view/privacy-policy-travel-mate/home";
     private static final String GITHUB_REPO = "https://github.com/project-travel-mate/Travel-Mate/";
@@ -69,26 +70,26 @@ public class AboutUsFragment extends Fragment {
         return view;
     }
 
-    @OnClick(R.id.cv_fork)
-    public void onForkClicked() {
-        Intent viewIntent =
-                new Intent(Intent.ACTION_VIEW, Uri.parse(GITHUB_REPO));
-        startActivity(viewIntent);
-    }
+//    @OnClick(R.id.cv_fork)
+//    public void onForkClicked() {
+//        Intent viewIntent =
+//                new Intent(Intent.ACTION_VIEW, Uri.parse(GITHUB_REPO));
+//        startActivity(viewIntent);
+//    }
 
-    @OnClick(R.id.cv_privacy_policy)
-    public void onPrivacyPolicyClicked() {
-        Intent viewIntent =
-                new Intent(Intent.ACTION_VIEW, Uri.parse(PRIVACY_POLICY));
-        startActivity(viewIntent);
-    }
+//    @OnClick(R.id.cv_privacy_policy)
+//    public void onPrivacyPolicyClicked() {
+//        Intent viewIntent =
+//                new Intent(Intent.ACTION_VIEW, Uri.parse(PRIVACY_POLICY));
+//        startActivity(viewIntent);
+//    }
 
-    @OnClick(R.id.cv_website)
-    public void onWebsiteClicked() {
-        Intent viewIntent =
-                new Intent(Intent.ACTION_VIEW, Uri.parse(WEBSITE));
-        startActivity(viewIntent);
-    }
+//    @OnClick(R.id.cv_website)
+//    public void onWebsiteClicked() {
+//        Intent viewIntent =
+//                new Intent(Intent.ACTION_VIEW, Uri.parse(WEBSITE));
+//        startActivity(viewIntent);
+//    }
 
     @OnClick(R.id.cv_contact_us)
     public void onContactUsClicked() {
@@ -107,39 +108,39 @@ public class AboutUsFragment extends Fragment {
         startActivity(sendIntent);
     }
 
-    @OnClick(R.id.cv_report_bug)
-    public void onReportBugClicked() {
-        Fragment fragment;
-        FragmentManager fragmentManager = getFragmentManager();
-        fragment = BugReportFragment.newInstance();
-        if (fragment != null && fragmentManager != null) {
-            fragmentManager.beginTransaction().addToBackStack(null).replace(R.id.inc, fragment).commit();
-        }
-    }
+//    @OnClick(R.id.cv_report_bug)
+//    public void onReportBugClicked() {
+//        Fragment fragment;
+//        FragmentManager fragmentManager = getFragmentManager();
+//        fragment = BugReportFragment.newInstance();
+//        if (fragment != null && fragmentManager != null) {
+//            fragmentManager.beginTransaction().addToBackStack(null).replace(R.id.inc, fragment).commit();
+//        }
+//    }
 
-    @OnClick(R.id.cv_slack)
-    public void onSlackClicked() {
-        Intent viewIntent =
-                new Intent(Intent.ACTION_VIEW, Uri.parse(SLACK_LINK));
-        startActivity(viewIntent);
-    }
+//    @OnClick(R.id.cv_slack)
+//    public void onSlackClicked() {
+//        Intent viewIntent =
+//                new Intent(Intent.ACTION_VIEW, Uri.parse(SLACK_LINK));
+//        startActivity(viewIntent);
+//    }
 
-    @OnClick(R.id.cv_bmc)
-    public void onBuyMeACoffeeClicked() {
-        Intent viewIntent =
-                new Intent(Intent.ACTION_VIEW, Uri.parse(BUY_ME_A_COFFEE));
-        startActivity(viewIntent);
-    }
+//    @OnClick(R.id.cv_bmc)
+//    public void onBuyMeACoffeeClicked() {
+//        Intent viewIntent =
+//                new Intent(Intent.ACTION_VIEW, Uri.parse(BUY_ME_A_COFFEE));
+//        startActivity(viewIntent);
+//    }
 
-    @OnClick(R.id.view_contributors)
-    public void onViewContributorsClicked() {
-        Fragment fragment;
-        FragmentManager fragmentManager = getFragmentManager();
-        fragment = ContributorsFragment.newInstance();
-        if (fragment != null && fragmentManager != null) {
-            fragmentManager.beginTransaction().addToBackStack(null).replace(R.id.inc, fragment).commit();
-        }
-    }
+//    @OnClick(R.id.view_contributors)
+//    public void onViewContributorsClicked() {
+//        Fragment fragment;
+//        FragmentManager fragmentManager = getFragmentManager();
+//        fragment = ContributorsFragment.newInstance();
+//        if (fragment != null && fragmentManager != null) {
+//            fragmentManager.beginTransaction().addToBackStack(null).replace(R.id.inc, fragment).commit();
+//        }
+//    }
 
     @Override
     public void onAttach(Context context) {

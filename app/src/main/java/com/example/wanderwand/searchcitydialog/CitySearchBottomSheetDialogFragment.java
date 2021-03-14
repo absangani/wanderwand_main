@@ -2,17 +2,10 @@ package com.example.wanderwand.searchcitydialog;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.BottomSheetDialog;
-import android.support.design.widget.BottomSheetDialogFragment;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -27,6 +20,16 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.wanderwand.R;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -34,7 +37,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.example.wanderwand.R;
 import utils.CircleImageView;
 
 public class CitySearchBottomSheetDialogFragment extends BottomSheetDialogFragment {
@@ -81,9 +83,9 @@ public class CitySearchBottomSheetDialogFragment extends BottomSheetDialogFragme
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog dialog = super.onCreateDialog(savedInstanceState);
 
-        dialog.setOnShowListener(dialog1 -> {
+        dialog.setOnShowListener((DialogInterface dialog1) -> {
             View bottomSheet = ((BottomSheetDialog) dialog1)
-                    .findViewById(android.support.design.R.id.design_bottom_sheet);
+                    .findViewById(R.id.design_bottom_sheet);
 
             BottomSheetBehavior.from(bottomSheet)
                     .setPeekHeight(Resources.getSystem().getDisplayMetrics().heightPixels);
@@ -212,7 +214,7 @@ public class CitySearchBottomSheetDialogFragment extends BottomSheetDialogFragme
             sb.setSpan(fcs, start, end, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
 
             holder.tvCityName.setText(sb);
-            Picasso.with(context).load(citySearchModel.getImageUrl())
+            Picasso.get().load(citySearchModel.getImageUrl())
                     .into(holder.civCityImage);
 
             if (mListener != null)
