@@ -27,19 +27,35 @@ import java.io.OutputStream;
 
 public class SelectImageActivity extends AppCompatActivity {
     ImageView viewImage;
-    Button b;
+    Button b, getDetailButton;
+    //ProgressDialog progressDoalog;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_image);
         b=(Button)findViewById(R.id.btnSelectPhoto);
         viewImage=(ImageView)findViewById(R.id.viewImage);
+        getDetailButton = findViewById(R.id.btnGetDetails);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selectImage();
             }
         });
+        getDetailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getImageDetails();
+            }
+        });
+    }
+
+    private void getImageDetails() {
+        Intent intent = new Intent(SelectImageActivity.this,ListOfPlacesActivity.class);
+        startActivity(intent);
+        finish();
     }
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
@@ -138,7 +154,5 @@ public class SelectImageActivity extends AppCompatActivity {
         }
     }
 
-    public void firebaseImageRecognize(){
 
-    }
 }

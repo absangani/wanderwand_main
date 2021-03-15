@@ -7,34 +7,98 @@
     tools:context=".clickImage.SelectImageActivity">
 
 
-    <LinearLayout
-        android:id="@+id/LinearLayout1"
+    <RelativeLayout
+        android:id="@+id/RelativeLayout1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="10dp" >
-        <LinearLayout
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="-63dp">
+
+        <!--        <RelativeLayout-->
+        <!--            android:id="@+id/LinearLayout1"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:gravity="center"-->
+        <!--            android:padding="5dp">-->
+
+        <Button
+            android:id="@+id/btnSelectPhoto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="5dp" >
-            <Button
-                android:id="@+id/btnSelectPhoto"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Select Photo" />
-        </LinearLayout>
-        <LinearLayout
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:text="Select Photo" />
+        <!--        </RelativeLayout>-->
+
+        <!--        <RelativeLayout-->
+        <!--            android:id="@+id/LinearLayout2"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:orientation="vertical"-->
+        <!--            android:padding="10dp">-->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/con2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="10dp" >
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/con1"
+            android:layout_below="@+id/btnSelectPhoto"
+            android:layout_alignStart="@id/btnSelectPhoto"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp">
+
             <ImageView
                 android:id="@+id/viewImage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/baseline_account_circle_black_48" />
-        </LinearLayout>
-    </LinearLayout>
+                android:maxHeight="200dp"
+                android:src="@drawable/baseline_account_circle_black_48"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--        </RelativeLayout>-->
+
+        <!--        <RelativeLayout-->
+        <!--            android:id="@+id/LinearLayout3"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_below="@+id/LinearLayout2"-->
+        <!--            android:layout_alignBottom="@+id/LinearLayout2"-->
+        <!--            android:layout_marginTop="-590dp"-->
+        <!--            android:layout_marginBottom="532dp"-->
+        <!--            android:gravity="center"-->
+        <!--            android:padding="5dp">-->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/con1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="9dp"
+            android:layout_marginBottom="5dp">
+
+            <Button
+                android:id="@+id/btnGetDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="Get Photo Details"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--        </RelativeLayout>-->
+
+
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
