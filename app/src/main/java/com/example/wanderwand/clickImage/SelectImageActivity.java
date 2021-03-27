@@ -9,12 +9,12 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +28,8 @@ import java.io.OutputStream;
 public class SelectImageActivity extends AppCompatActivity {
     ImageView viewImage;
     Button b, getDetailButton;
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
     //ProgressDialog progressDoalog;
 
 
@@ -53,9 +55,16 @@ public class SelectImageActivity extends AppCompatActivity {
     }
 
     private void getImageDetails() {
-        Intent intent = new Intent(SelectImageActivity.this,ListOfPlacesActivity.class);
-        startActivity(intent);
-        finish();
+//        boolean isSelected = preferences.contains("SelectImageURL");
+        boolean isSelected = true;
+        if(isSelected) {
+
+            Intent intent = new Intent(SelectImageActivity.this, ListOfPlacesActivity.class);
+            startActivity(intent);
+            finish();
+        }else {
+            Toast.makeText(SelectImageActivity.this,"please select image",Toast.LENGTH_SHORT).show();
+        }
     }
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
@@ -145,9 +154,11 @@ public class SelectImageActivity extends AppCompatActivity {
                 Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
                 Log.w("thumbnail", thumbnail+"");
 
-                SharedPreferences.Editor prefEditor = PreferenceManager.getDefaultSharedPreferences(SelectImageActivity.this).edit();
-                prefEditor.putString("SelectImageURL", picturePath);
-                prefEditor.apply();
+                editor.putString("SelectImageURL",picturePath);
+                editor.apply();
+//                SharedPreferences.Editor prefEditor = PreferenceManager.getDefaultSharedPreferences(SelectImageActivity.this).edit();
+//                prefEditor.putString("SelectImageURL", picturePath);
+//                prefEditor.apply();
                 Log.w("pathImage123", picturePath+"");
                 viewImage.setImageBitmap(thumbnail);
             }

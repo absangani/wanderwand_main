@@ -81,13 +81,13 @@ public class ListOfPlacesActivity extends AppCompatActivity {
             PleceRV = findViewById(R.id.PlaceView);
             // here we have created new array list and added data to it.
             PleceDetailsModelArrayList = new ArrayList<>();
-            PleceDetailsModelArrayList.add(new PleceDetailsModel("DSA in Java", 4, R.drawable.hotel));
-            PleceDetailsModelArrayList.add(new PleceDetailsModel("Java Plece", 3, R.drawable.ic_home));
-            PleceDetailsModelArrayList.add(new PleceDetailsModel("C++ Plece", 4, R.drawable.ic_home));
-            PleceDetailsModelArrayList.add(new PleceDetailsModel("DSA in C++", 4, R.drawable.ic_home));
-            PleceDetailsModelArrayList.add(new PleceDetailsModel("Kotlin for Android", 4, R.drawable.ic_home));
-            PleceDetailsModelArrayList.add(new PleceDetailsModel("Java for Android", 4, R.drawable.ic_home));
-            PleceDetailsModelArrayList.add(new PleceDetailsModel("HTML and CSS", 4, R.drawable.ic_home));
+            PleceDetailsModelArrayList.add(new PleceDetailsModel("Tajmahel", 4, R.drawable.hotel));
+            PleceDetailsModelArrayList.add(new PleceDetailsModel("Kutub Minar", 3, R.drawable.ic_home));
+            PleceDetailsModelArrayList.add(new PleceDetailsModel("Goa Bich", 4, R.drawable.ic_home));
+//            PleceDetailsModelArrayList.add(new PleceDetailsModel("DSA in C++", 4, R.drawable.ic_home));
+//            PleceDetailsModelArrayList.add(new PleceDetailsModel("Kotlin for Android", 4, R.drawable.ic_home));
+//            PleceDetailsModelArrayList.add(new PleceDetailsModel("Java for Android", 4, R.drawable.ic_home));
+//            PleceDetailsModelArrayList.add(new PleceDetailsModel("HTML and CSS", 4, R.drawable.ic_home));
 
             // we are initializing our adapter class and passing our arraylist to it.
             placeItemAdapter placeItemAdapter = new placeItemAdapter(ListOfPlacesActivity.this, PleceDetailsModelArrayList);

@@ -25,7 +25,6 @@
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
-        android:allowBackup="true"
         android:icon="@drawable/google_travel_logo"
         android:label="@string/app_name"
         android:largeHeap="true"
@@ -33,7 +32,14 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.Wanderwand">
-        <activity android:name=".clickImage.ListOfPlacesActivity"></activity>
+        <activity android:name=".clickImage.SingalPlaceDiscirptionActivity"></activity>
+        <activity android:name=".clickImage.DetectLandmarks" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAh87FWtWrcunf674eC80RpNXS771y8jNw" />
+
+        <activity android:name=".clickImage.ListOfPlacesActivity" />
         <activity android:name=".clickImage.SelectImageActivity" />
 
         <provider
