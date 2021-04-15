@@ -29,6 +29,7 @@ public class ListOfPlacesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_of_places);
+        PleceRV = findViewById(R.id.PlaceView);
         showProgress();
         new callAdepter().execute();
 

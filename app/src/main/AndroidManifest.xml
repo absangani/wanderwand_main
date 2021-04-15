@@ -32,7 +32,7 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.Wanderwand">
-        <activity android:name=".clickImage.SingalPlaceDiscirptionActivity"></activity>
+        <activity android:name=".clickImage.SingalPlaceDiscirptionActivity"/>
         <activity android:name=".clickImage.DetectLandmarks" />
 
         <meta-data
@@ -137,15 +137,6 @@
             android:label="@string/verify_email"
             android:theme="@style/AppThemeNoBar" />
 
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.wanderwand.shareFile"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths" />
-        </provider>
 
         <activity
             android:name=".ProfileActivity"

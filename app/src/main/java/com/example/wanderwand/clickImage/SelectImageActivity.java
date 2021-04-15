@@ -1,29 +1,29 @@
 package com.example.wanderwand.clickImage;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.wanderwand.R;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 public class SelectImageActivity extends AppCompatActivity {
     ImageView viewImage;
@@ -31,6 +31,11 @@ public class SelectImageActivity extends AppCompatActivity {
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
     //ProgressDialog progressDoalog;
+
+    private Uri imageUri;
+    private String imageUrl;
+
+    final static int Gallery_Pick = 1;
 
 
     @Override
@@ -74,28 +79,30 @@ public class SelectImageActivity extends AppCompatActivity {
 //    }
 
     private void selectImage() {
-        final CharSequence[] options = { "Take Photo", "Choose from Gallery","Cancel" };
+        final CharSequence[] items = { "Camera","Gallery", "Cancel" };
         AlertDialog.Builder builder = new AlertDialog.Builder(SelectImageActivity.this);
         builder.setTitle("Add Photo!");
-        builder.setItems(options, new DialogInterface.OnClickListener() {
+        builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int item) {
-                if (options[item].equals("Take Photo"))
-                {
-                    Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                    File f = new File(android.os.Environment.getExternalStorageDirectory(), "temp.jpg");
-//                    Uri photoURI = FileProvider.getUriForFile(SelectImageActivity.this, SelectImageActivity.this.getApplicationContext().getPackageName() + ".shareFile", createImageFile());
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
-                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                    startActivityForResult(intent, 1);
-                }
-                else if (options[item].equals("Choose from Gallery"))
-                {
-                    Intent intent = new   Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    startActivityForResult(intent, 2);
-                }
-                else if (options[item].equals("Cancel")) {
-                    dialog.dismiss();
+            public void onClick(DialogInterface dialog, int i) {
+                if (items[i].equals("Camera")) {
+                    if(hasPermission(SelectImageActivity.this, Manifest.permission.CAMERA)){
+                        Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        startActivityForResult(camera,1000);
+                    }else {
+                        // ask for camera permissions
+                        ActivityCompat.requestPermissions(SelectImageActivity.this,new String[]{Manifest.permission.CAMERA},102);
+                    }
+                } else if (items[i].equals("Gallery")) {
+                    if(hasPermission(SelectImageActivity.this,Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+                        Intent intent = new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        intent.setType("image/*");
+                        startActivityForResult(intent, Gallery_Pick);
+                    }else {
+                        ActivityCompat.requestPermissions(SelectImageActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},103);
+                    }
+
+                } else if (items[i].equals("Cancel")) {
                 }
             }
         });
@@ -103,64 +110,117 @@ public class SelectImageActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == 102){
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED ){
+                // permission is granted
+                Toast.makeText(this, "Permission is Granted.", Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText(this, "Permission is Denied.", Toast.LENGTH_SHORT).show();
+            }
+        }
+        if(requestCode == 103){
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED ){
+                // permission is granted
+                Toast.makeText(this, "Permission is Granted.", Toast.LENGTH_SHORT).show();
+
+            }else {
+                Toast.makeText(this, "Permission is Denied.", Toast.LENGTH_SHORT).show();
+            }
+        }
+        if(ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+            // alert dialog
+
+            AlertDialog.Builder extraInfo = new AlertDialog.Builder(this);
+            extraInfo.setTitle("Storage Permission is Required.");
+            extraInfo.setMessage("To Run this app, App needs access to storage to save the file.");
+
+            extraInfo.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    ActivityCompat.requestPermissions(SelectImageActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},103);
+                }
+            });
+
+            extraInfo.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Toast.makeText(SelectImageActivity.this, "Some Feature of App Might not Work.", Toast.LENGTH_SHORT).show();
+                }
+            });
+            extraInfo.create().show();
+        }
+    }
+
+    private boolean hasPermission(Context context, String permission){
+        return ContextCompat.checkSelfPermission(context,permission) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            if (requestCode == 1) {
-                File f = new File(Environment.getExternalStorageDirectory().toString());
-                for (File temp : f.listFiles()) {
-                    if (temp.getName().equals("temp.jpg")) {
-                        f = temp;
-                        break;
-                    }
-                }
-                try {
-                    Bitmap bitmap;
-                    BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
-                    bitmap = BitmapFactory.decodeFile(f.getAbsolutePath(),
-                            bitmapOptions);
-                    viewImage.setImageBitmap(bitmap);
-                    String path = android.os.Environment
-                            .getExternalStorageDirectory()
-                            + File.separator
-                            + "Phoenix" + File.separator + "default";
-                    Log.d("pathImage", "onActivityResult: "+path +"\n"+bitmap);
+        if(requestCode== Gallery_Pick && resultCode==RESULT_OK && data!=null){
+            imageUri= data.getData();
+            CropImage.activity(imageUri)
+                    .setGuidelines(CropImageView.Guidelines.ON)
+                    .setAspectRatio(1, 1)
+                    .start(this);
+        }
 
-                    f.delete();
-                    OutputStream outFile = null;
-                    File file = new File(path, String.valueOf(System.currentTimeMillis()) + ".jpg");
-                    try {
-                        outFile = new FileOutputStream(file);
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 85, outFile);
-                        outFile.flush();
-                        outFile.close();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            } else if (requestCode == 2) {
-                Uri selectedImage = data.getData();
-                Log.w("selectedImage", "onActivityResult: "+selectedImage.toString());
-                String[] filePath = { MediaStore.Images.Media.DATA };
-                Log.d("newfile path", "onActivityResult: "+filePath);
-                Cursor c = getContentResolver().query(selectedImage,filePath, null, null, null);
-                c.moveToFirst();
-                int columnIndex = c.getColumnIndex(filePath[0]);
-                String picturePath = c.getString(columnIndex);
-                Log.w("pathImage4", picturePath+"");
-                c.close();
-                Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
-                Log.w("thumbnail", thumbnail+"");
+        else if (requestCode==1000 && resultCode==RESULT_OK && data!=null){
+            imageUri= data.getData();
+            CropImage.activity(imageUri)
+                    .setGuidelines(CropImageView.Guidelines.ON)
+                    .setAspectRatio(1, 1)
+                    .start(this);
+        }
 
-                editor.putString("SelectImageURL",picturePath);
-                editor.apply();
-//                SharedPreferences.Editor prefEditor = PreferenceManager.getDefaultSharedPreferences(SelectImageActivity.this).edit();
-//                prefEditor.putString("SelectImageURL", picturePath);
-//                prefEditor.apply();
-                Log.w("pathImage123", picturePath+"");
-                viewImage.setImageBitmap(thumbnail);
+        if(requestCode==CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE){
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+
+            if(resultCode == RESULT_OK){
+
+                   /* Uri resultUri = result.getUri();
+
+                    // Firebase Storage
+                    /final StorageReference filePath = UserProfileImageRef.child(currentUserID + ".jpg");
+                    filePath.putFile(resultUri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                        @Override
+                        public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                            if (!task.isSuccessful()){
+                                throw task.getException();
+                            }
+                            return filePath.getDownloadUrl();
+                        }
+                    }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
+                            if (task.isSuccessful()){
+                                Uri downUri = task.getResult();
+
+                                final String downloadUrl = downUri.toString();
+
+                                //Database
+                                UsersRef.child("profileimage").setValue(downloadUrl).
+                                        addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if(task.isSuccessful()){
+                                                    Toast.makeText(SelectImageActivity.this, "Profile Image stored to Database Successfully...", Toast.LENGTH_SHORT).show();
+
+                                                }else{
+                                                    String message = task.getException().getMessage();
+                                                    Toast.makeText(SelectImageActivity.this, "Error Occured: " + message, Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        });
+                            }
+                        }
+                    });*/
+
+            }else{
+                Toast.makeText(this, "Error Occured: Image can not be cropped. Try Again.", Toast.LENGTH_SHORT).show();
             }
         }
     }

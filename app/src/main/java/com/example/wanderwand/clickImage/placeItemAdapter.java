@@ -21,6 +21,12 @@ public class placeItemAdapter extends RecyclerView.Adapter<placeItemAdapter.View
     private Context context;
     private ArrayList<PleceDetailsModel> PleceDetailsModelArrayList;
 
+    private OnItemClickListener onClick;
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
     // Constructor
     public placeItemAdapter(Context context, ArrayList<PleceDetailsModel> PleceDetailsModelArrayList) {
         this.context = context;
