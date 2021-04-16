@@ -315,6 +315,11 @@ public class FinalCityInfoActivity extends AppCompatActivity
         });
     }
 
+    @Override
+    public void networkError() {
+        
+    }
+
     /**
      * auto slides images in the final city info
      *
@@ -404,8 +409,8 @@ public class FinalCityInfoActivity extends AppCompatActivity
     /**
      * Plays the network lost animation in the view
      */
-    public void networkError() {
-        animationView.setAnimation(R.raw.network_lost);
-        animationView.playAnimation();
-    }
+//    public void networkError() {
+////        animationView.setAnimation(R.raw.network_lost);
+////        animationView.playAnimation();
+//    }
 }
